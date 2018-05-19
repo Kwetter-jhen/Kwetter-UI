@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Tweets</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let tweet of tweets">
+        <p>{{ tweet.text }} - {{ tweet.kwetterUser.username }}</p>
+        <button mat-raised-button color="primary" (click)="report(tweet)" class="report-button">Report</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,33 @@
+<mat-card class="col-12">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Users</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let user of users">
+        <p>{{ user.username }} - {{ user.userType }}</p>
+        <div *ngIf="user.userType !== 'ADMIN'">
+          <button mat-raised-button color="primary" (click)="promoteUser(user.username)" class="promote-button">Promote</button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="col-12">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Reported tweets</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let tweet of reportedTweets">
+        <p>{{ tweet.text }} - {{ tweet.kwetterUser.username }}</p>
+        <button mat-raised-button color="primary" (click)="remove(tweet)" class="promote-button">Remove</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

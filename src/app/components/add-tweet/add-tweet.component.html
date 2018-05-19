@@ -1,0 +1,13 @@
+<mat-card class="example-card">
+
+  <mat-card-content>
+    <form>
+      <mat-form-field class="example-full-width">
+        <textarea matInput maxlength="140" placeholder="What's on your mind?" [(ngModel)]="tweetText" name="tweetText">
+        </textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="postTweet()">Post tweet</button>
+    </form>
+
+  </mat-card-content>
+</mat-card>

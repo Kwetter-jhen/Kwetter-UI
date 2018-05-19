@@ -1,0 +1,18 @@
+a {
+    margin: 8px;
+    text-decoration: none;
+}
+
+a:link { /* Essentially means a[href], or that the link actually goes somewhere */
+    color: white;
+}
+a:visited {
+    color: white;
+}
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+a:active {
+    color: white;
+}
