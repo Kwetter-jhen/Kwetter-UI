@@ -7,7 +7,7 @@ import { LoginService } from '../login/login.service';
 
 @Injectable()
 export class UserService {
-  private apiUrl = 'http://localhost:8080/Kwetter/api';
+  private apiUrl = 'https://kwetter-jhen-restless-bilby.cfapps.io';
 
   public following: KwetterUser[] = [];
   public followers: KwetterUser[] = [];

@@ -8,7 +8,7 @@ import {Tweet} from '../../domain/tweet';
 
 @Injectable()
 export class AdminService {
-  private apiUrl = 'http://localhost:8080/Kwetter/api'; // URL to web api
+  private apiUrl = 'https://kwetter-jhen-restless-bilby.cfapps.io'; // URL to web api
   public users: KwetterUser[] = [];
   public reportedTweets: Tweet[] = [];
 

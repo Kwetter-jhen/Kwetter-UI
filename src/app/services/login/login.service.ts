@@ -10,7 +10,7 @@ import {RoutingService} from '../routing/routing.service';
 @Injectable()
 export class LoginService {
 
-  private apiUrl = 'http://localhost:8080/Kwetter/api'; // URL to web api
+  private apiUrl = 'https://kwetter-jhen-restless-bilby.cfapps.io'; // URL to web api
 
   public token: string;
   public loggedUser: KwetterUser;

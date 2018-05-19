@@ -11,7 +11,7 @@ import {KwetterUser} from '../../domain/kwetterUser';
 export class TweetService {
   public static relevantTweets: Tweet[] = [];
 
-  private apiUrl = 'http://localhost:8080/Kwetter/api';
+  private apiUrl = 'https://kwetter-jhen-restless-bilby.cfapps.io';
 
   public tweets: Tweet[] = [];
 
@@ -35,26 +35,8 @@ export class TweetService {
     return this.http.get<Tweet[]>(url, httpOptions).pipe(
       tap((tweets: Tweet[]) => {
         TweetService.relevantTweets = tweets;
-        this.openTweetSocketConnection();
       })
     );
-  }
-
-  private openTweetSocketConnection() {
-    if (this.ws != null) { return; }
-
-    this.ws = new WebSocket(`ws://localhost:8080/Kwetter/tweetsocket?token=${this.loginService.token}`);
-
-    this.ws.onmessage = function (event, ) {
-      console.log('message: ', event.data);
-      const newTweet: Tweet = JSON.parse(event.data);
-      TweetService.relevantTweets.unshift(newTweet);
-    };
-
-    this.ws.onopen = function () {
-      console.log('connection open');
-      this.send('HELLO SERVER');
-    };
   }
 
   getTweets(username: string): Observable<Tweet[]> {
