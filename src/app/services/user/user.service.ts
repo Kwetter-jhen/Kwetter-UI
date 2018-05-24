@@ -62,7 +62,7 @@ export class UserService {
 
   getBillingId(): Observable<string> {
     const username = encodeURIComponent(this.loginService.loggedUser.username);
-    const url = `${AppSettings.KWETTER_API}/users/${username}/billingid`
+    const url = `${AppSettings.KWETTER_API}/users/${username}/billingid`;
     const httpOptions = {
       headers: new HttpHeaders(
         {
@@ -93,9 +93,9 @@ export class UserService {
     const url = `${AppSettings.KWETTER_BILLING_API}/payments`;
 
     return this.http.post<Payment>(url, payment).pipe(
-      tap((payment: Payment) => {
-        this.payments.push(payment);
+      tap((returnedPayment: Payment) => {
+        this.payments.push(returnedPayment);
       })
-    )
+    );
   }
 }

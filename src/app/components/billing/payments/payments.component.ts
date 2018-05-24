@@ -9,7 +9,7 @@ import {UserService} from '../../../services/user/user.service';
 })
 export class PaymentsComponent implements OnInit {
   @Input() billingId: string;
-  newAmount: number = 0;
+  newAmount = 0;
   payments: Payment[];
 
   constructor(private userService: UserService) { }
@@ -18,7 +18,7 @@ export class PaymentsComponent implements OnInit {
     this.userService.getPayments(this.billingId).subscribe(
       (payments: Payment[]) => {
         this.payments = payments;
-      })
+      });
   }
 
   pay() {

@@ -3,7 +3,8 @@ import { KwetterUser } from '../../domain/kwetterUser';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { LoginService } from '../../services/login/login.service';
-import { Observable } from 'rxjs/Rx';
+import {forkJoin} from 'rxjs/observable/forkJoin';
+
 
 @Component({
   selector: 'app-user-view',
@@ -21,7 +22,7 @@ export class UserViewComponent implements OnInit {
 
   ngOnInit() {
     const username = this.route.snapshot.paramMap.get('username');
-    Observable.forkJoin([
+    forkJoin([
       this.userService.getUser(username),
       this.loginService.getLoggedInUser()])
       .subscribe(data => {
