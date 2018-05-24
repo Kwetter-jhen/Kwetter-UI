@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Payments</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Amount" value="0" type="number" [(ngModel)]="newAmount" name="newAmount">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="pay()">Pay</button>
+  </form>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let payment of payments">
+        <p>Paid: {{ payment.amount }}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

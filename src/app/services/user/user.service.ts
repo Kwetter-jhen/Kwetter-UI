@@ -5,12 +5,14 @@ import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 import { LoginService } from '../login/login.service';
 import {AppSettings} from '../../AppSettings';
+import {Payment} from '../../domain/payment';
 
 @Injectable()
 export class UserService {
   public following: KwetterUser[] = [];
   public followers: KwetterUser[] = [];
   public viewedUser: KwetterUser;
+  public payments: Payment[] = [];
 
   constructor(private loginService: LoginService,
     private http: HttpClient) { }
@@ -56,5 +58,44 @@ export class UserService {
         this.followers.push(this.loginService.loggedUser);
       })
     );
+  }
+
+  getBillingId(): Observable<string> {
+    const username = encodeURIComponent(this.loginService.loggedUser.username);
+    const url = `${AppSettings.KWETTER_API}/users/${username}/billingid`
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'token': this.loginService.token
+        })
+    };
+
+    return this.http.get<string>(url, httpOptions);
+  }
+
+  getPayments(billingId: string): Observable<Payment[]> {
+    const billingIdParsed = encodeURIComponent(billingId);
+    const url = `${AppSettings.KWETTER_BILLING_API}/payments?billingId=${billingIdParsed}`;
+
+    return this.http.get<Payment[]>(url).pipe(
+      tap((payments: Payment[]) => {
+        this.payments = payments;
+      })
+    );
+  }
+
+  addPayment(billingId: string, amount: number): Observable<Payment> {
+    const payment: Payment = new Payment();
+    payment.amount = amount;
+    payment.billingId = billingId;
+
+    const url = `${AppSettings.KWETTER_BILLING_API}/payments`;
+
+    return this.http.post<Payment>(url, payment).pipe(
+      tap((payment: Payment) => {
+        this.payments.push(payment);
+      })
+    )
   }
 }

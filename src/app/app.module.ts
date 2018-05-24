@@ -30,6 +30,8 @@ import {RelevantTweetsComponent} from './components/relevant-tweets/relevant-twe
 import {TweetsComponent} from './components/tweets/tweets.component';
 import {AdminService} from './services/admin/admin.service';
 import { AdminViewComponent } from './components/admin-view/admin-view.component';
+import { BillingComponent } from './components/billing/billing.component';
+import { PaymentsComponent } from './components/billing/payments/payments.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { AdminViewComponent } from './components/admin-view/admin-view.component
     FollowingFollowersComponent,
     UserViewComponent,
     TweetsComponent,
-    AdminViewComponent
+    AdminViewComponent,
+    BillingComponent,
+    PaymentsComponent
   ],
   imports: [
     BrowserModule,
