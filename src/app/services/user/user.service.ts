@@ -4,11 +4,10 @@ import { KwetterUser } from '../../domain/kwetterUser';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 import { LoginService } from '../login/login.service';
+import {AppSettings} from '../../AppSettings';
 
 @Injectable()
 export class UserService {
-  private apiUrl = 'https://kwetter-jhen-restless-bilby.cfapps.io';
-
   public following: KwetterUser[] = [];
   public followers: KwetterUser[] = [];
   public viewedUser: KwetterUser;
@@ -33,7 +32,7 @@ export class UserService {
   }
 
   getUser(username: string): Observable<KwetterUser> {
-    const url = `${this.apiUrl}/users/${encodeURIComponent(username)}`;
+    const url = `${AppSettings.KWETTER_API}/users/${encodeURIComponent(username)}`;
 
     return this.http.get<KwetterUser>(url).pipe(
       tap((user: KwetterUser) => {
@@ -43,7 +42,7 @@ export class UserService {
   }
 
   followUser(username: string): Observable<KwetterUser> {
-    const url = `${this.apiUrl}/users/follow/${encodeURIComponent(username)}`;
+    const url = `${AppSettings.KWETTER_API}/users/follow/${encodeURIComponent(username)}`;
     const httpOptions = {
       headers: new HttpHeaders(
         {

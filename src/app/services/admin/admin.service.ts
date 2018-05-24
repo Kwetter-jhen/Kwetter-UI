@@ -5,10 +5,10 @@ import {Observable} from 'rxjs/Observable';
 import {LoginService} from '../login/login.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Tweet} from '../../domain/tweet';
+import {AppSettings} from '../../AppSettings';
 
 @Injectable()
 export class AdminService {
-  private apiUrl = 'https://kwetter-jhen-restless-bilby.cfapps.io'; // URL to web api
   public users: KwetterUser[] = [];
   public reportedTweets: Tweet[] = [];
 
@@ -16,7 +16,7 @@ export class AdminService {
               private loginService: LoginService) { }
 
   getUsers(): Observable<KwetterUser[]> {
-    const url = `${this.apiUrl}/users`;
+    const url = `${AppSettings.KWETTER_API}/users`;
     const httpOptions = {
       headers: new HttpHeaders(
         {
@@ -31,7 +31,7 @@ export class AdminService {
   }
 
   promoteUser(username: string): Observable<KwetterUser> {
-    const url = `${this.apiUrl}/users/admin/${encodeURIComponent(username)}`;
+    const url = `${AppSettings.KWETTER_API}/users/admin/${encodeURIComponent(username)}`;
     const httpOptions = {
       headers: new HttpHeaders(
         {
@@ -46,7 +46,7 @@ export class AdminService {
   }
 
   getReportedTweets(): Observable<Tweet[]> {
-    const url = `${this.apiUrl}/tweets?reported=true`;
+    const url = `${AppSettings.KWETTER_API}/tweets?reported=true`;
     const httpOptions = {
       headers: new HttpHeaders(
         {

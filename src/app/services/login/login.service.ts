@@ -6,12 +6,10 @@ import {of} from 'rxjs/observable/of';
 import {catchError, map, tap} from 'rxjs/operators';
 import {KwetterUser} from '../../domain/kwetterUser';
 import {RoutingService} from '../routing/routing.service';
+import {AppSettings} from '../../AppSettings';
 
 @Injectable()
 export class LoginService {
-
-  private apiUrl = 'https://kwetter-jhen-restless-bilby.cfapps.io'; // URL to web api
-
   public token: string;
   public loggedUser: KwetterUser;
 
@@ -23,7 +21,7 @@ export class LoginService {
   }
 
   getToken(username: string, password: string): Observable<string> {
-    const url = `${this.apiUrl}/users/login`;
+    const url = `${AppSettings.KWETTER_API}/users/login`;
     const httpOptions = {
       headers: new HttpHeaders(
         {
@@ -39,7 +37,7 @@ export class LoginService {
   }
 
   getLoggedInUser(): Observable<KwetterUser> {
-    const url = `${this.apiUrl}/users?token=${this.token}`;
+    const url = `${AppSettings.KWETTER_API}/users?token=${this.token}`;
     const httpOptions = {
       headers: new HttpHeaders(
         {

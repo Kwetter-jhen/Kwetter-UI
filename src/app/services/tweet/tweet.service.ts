@@ -6,12 +6,11 @@ import { tap } from 'rxjs/operators';
 import { Tweet } from '../../domain/tweet';
 import {LoginService} from '../login/login.service';
 import {KwetterUser} from '../../domain/kwetterUser';
+import {AppSettings} from '../../AppSettings';
 
 @Injectable()
 export class TweetService {
   public static relevantTweets: Tweet[] = [];
-
-  private apiUrl = 'https://kwetter-jhen-restless-bilby.cfapps.io';
 
   public tweets: Tweet[] = [];
 
@@ -40,7 +39,7 @@ export class TweetService {
   }
 
   getTweets(username: string): Observable<Tweet[]> {
-    const url = `${this.apiUrl}/tweets?username=${username}`;
+    const url = `${AppSettings.KWETTER_API}/tweets?username=${username}`;
 
     const httpOptions = {
       headers: new HttpHeaders(
@@ -56,7 +55,7 @@ export class TweetService {
   }
 
   postTweet(tweetText: string): Observable<Tweet> {
-    const url = `${this.apiUrl}/tweets`;
+    const url = `${AppSettings.KWETTER_API}/tweets`;
 
     const httpOptions = {
       headers: new HttpHeaders(
