@@ -1,6 +1,10 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <span><a routerLink="/home">{{title}}</a></span>
+        <div *ngIf="loginService.token">
+          <span><a routerLink="/billing">Billing</a></span>
+          <span><a routerLink="/login" (click)="logout()" name="something">Logout</a></span>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>

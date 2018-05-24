@@ -1,9 +1,0 @@
----
-applications:
-- name: kwetter-ui-jhen
-  memory: 64M
-  disk_quota: 64M
-  instances: 1
-  random-route: true
-  env:
-    FORCE_HTTPS: true
